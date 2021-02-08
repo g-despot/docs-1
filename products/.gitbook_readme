@@ -1,35 +1,30 @@
-# Overview
+# Introduction
 
 ## Memgraph
 
-Memgraph is an ACID-compliant high performance transactional in-memory graph
-database management system featuring highly concurrent data structures,
-multi-version concurrency control, and asynchronous IO.
+Memgraph is an ACID-compliant high performance transactional in-memory graph database management system featuring highly concurrent data structures, multi-version concurrency control, and asynchronous IO.
 
-{% page-ref page="memgraph/v1.3.0/getting_started/getting-started.md" %}
-{% page-ref page="memgraph/v1.3.0/database_functionalities/database-functionalities.md" %}
-{% page-ref page="memgraph/v1.3.0/reference_guide/reference-guide.md" %}
+{% page-ref page="memgraph/getting-started/" %}
+
+{% page-ref page="memgraph/database-functionalities/" %}
+
+{% page-ref page="memgraph/reference-guide/" %}
 
 ## Memgraph Lab
 
-Memgraph Lab is a lightweight and intuitive openCypher and Bolt compatible
-integrated development environment (IDE), designed to help you import data,
-develop, debug, and profile database queries and visualize query results.
-{% page-ref page="./lab/v1.3.0/quick-start.md" %}
-![Memgraph Lab](./memgraph/v1.3.0/data/product-hunt-gallery-lab.png)
+Memgraph Lab is a lightweight and intuitive openCypher and Bolt compatible integrated development environment \(IDE\), designed to help you import data, develop, debug, and profile database queries and visualize query results.
+
+![Memgraph Lab](.gitbook/assets/product-hunt-gallery-lab%20%283%29.png)
 
 ## Memgraph Cloud
 
-To offer its users more flexibility and a better experience, Memgraph provides
-fully managed graph DBMS as a service (in the Cloud). Users do not need to set
-up or maintain a database instance. It is Memgraph's responsibility to oversee
-the infrastructure (deployment, upgrade, update, removal, data backup,
-security, etc.).
-{% page-ref page="./memgraph_cloud/how-to-connect.md" %}
-![Memgraph Cloud](./memgraph/v1.3.0/data/product-hunt-gallery-cloud.png)
+To offer its users more flexibility and a better experience, Memgraph provides fully managed graph DBMS as a service \(in the Cloud\). Users do not need to set up or maintain a database instance. It is Memgraph's responsibility to oversee the infrastructure \(deployment, upgrade, update, removal, data backup, security, etc.\).
+
+{% page-ref page="memgraph-cloud/how-to-connect.md" %}
+
+![Memgraph Cloud](.gitbook/assets/product-hunt-gallery-cloud%20%283%29.png)
 
 ## Note
 
-These pages contain only the documents related to the latest versions of
-Memgraph products. For older versions please visit
-[this](https://github.com/memgraph/docs/tree/master/products) page.
+These pages contain only the documents related to the latest versions of Memgraph products. For older versions please visit [this](https://github.com/memgraph/docs/tree/master/products) page.
+
