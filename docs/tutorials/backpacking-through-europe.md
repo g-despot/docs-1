@@ -45,14 +45,14 @@ edge.
 
 ## Exploring the dataset
 
-You have two options for exploring this dataset. 
-If you just want to take a look at the dataset and try out a few queries, open 
-[Memgraph Playground](https://playground.memgraph.com/) and continue with 
+You have two options for exploring this dataset.
+If you just want to take a look at the dataset and try out a few queries, open
+[Memgraph Playground](https://playground.memgraph.com/) and continue with
 the tutorial there. Note that you will not be able to execute `write` operations.
 
-On the other hand, if you would like to add changes to the dataset, download the 
-[Memgraph Lab](https://memgraph.com/product/lab) desktop application and navigate 
-to the `Datasets` tab in the sidebar. From there, choose the dataset 
+On the other hand, if you would like to add changes to the dataset, download the
+[Memgraph Lab](https://memgraph.com/product/lab) desktop application and navigate
+to the `Datasets` tab in the sidebar. From there, choose the dataset
 `Backpacking through Europe` and continue with the tutorial.
 
 ## Example queries
@@ -63,7 +63,8 @@ from the European Backpacker Index.
 ```cypher
 MATCH (n:City)
 RETURN n.name, n.cheapest_hostel, n.cost_per_night_USD, n.hostel_url
-ORDER BY n.cost_per_night_USD LIMIT 10;
+ORDER BY n.cost_per_night_USD
+LIMIT 10;
 ```
 
 2) Say we want to visit Croatia. Which cities does Backpackers Index recommend?
@@ -80,8 +81,9 @@ which country has the most cities in the index?
 
 ```cypher
 MATCH (n:Country)<-[:Inside]-(m:City)
-RETURN n.name AS CountryName, COUNT(m) AS HostelCount
-ORDER BY HostelCount DESC, CountryName LIMIT 10;
+RETURN n.name AS countryName, COUNT(m) AS hostelCount
+ORDER BY hostelCount DESC, countryName
+LIMIT 10;
 ```
 
 Now, let's start backpacking. This is where Memgraph's graph traversal
@@ -94,7 +96,7 @@ borders. This is a great job for the breadth-first search (BFS) algorithm.
 MATCH p = (n:Country {name: "Spain"})
           -[r:Borders * bfs]-
           (m:Country {name: "Russia"})
-UNWIND (nodes(p)) AS rows
+UNWIND nodes(p) AS rows
 RETURN rows.name;
 ```
 
@@ -106,7 +108,7 @@ pay with Euro everywhere along the trip.
 MATCH p = (:City {name: "Bratislava"})
           -[:CloseTo * bfs (e, v | v.local_currency = "Euro")]-
           (:City {name: "Madrid"})
-UNWIND (nodes(p)) AS rows
+UNWIND nodes(p) AS rows
 RETURN rows.name;
 ```
 
@@ -124,7 +126,7 @@ This is a good use case for the Dijkstra's shortest path algorithm.
 
 ```cypher
 MATCH p = (:City {name: "Brussels"})
-          -[:CloseTo * wShortest(e, v | v.cost_per_night_USD) total_cost (e, v | e.eu_border=FALSE)]-
+          -[:CloseTo * wShortest(e, v | v.cost_per_night_USD) total_cost (e, v | e.eu_border=false)]-
           (:City {name: "Athens"})
 WITH extract(city in nodes(p) | city.name) AS trip, total_cost
 RETURN trip, total_cost;
@@ -133,7 +135,7 @@ RETURN trip, total_cost;
 Here we used the *weight lambda* to specify the cost of expanding to the
 specified vertex using the given edge (`v.cost_per_night_USD`), and the
 *total cost* symbol to calculate the cost of the trip.
-This can be done using an edge property like in the 
+This can be done using an edge property like in the
 [Exploring the European Road Network](exploring-the-european-road-network.md)
 tutorial.
 Here we use `cost_per_night` property of the city vertex `v` as our weight.
@@ -163,7 +165,7 @@ Let's list our top 10 options sorted by the total trip cost and number of
 cities in the path.
 
 ```cypher
-MATCH path = (n:City {name: "Paris"})-[:CloseTo *3..5]-(m:City {name: "Zagreb"}) 
+MATCH path = (n:City {name: "Paris"})-[:CloseTo *3..5]-(m:City {name: "Zagreb"})
 WITH nodes(path) AS trip
 WITH extract(city in trip | [city, trip]) AS lst
 UNWIND lst AS rows
@@ -171,7 +173,8 @@ WITH rows[0] AS city, extract(city in rows[1] | city.name) AS trip
 RETURN trip,
        toInteger(sum(city.total_USD)) AS trip_cost_USD,
        count(trip) AS city_count
-ORDER BY trip_cost_USD, city_count DESC LIMIT 10;
+ORDER BY trip_cost_USD, city_count DESC
+LIMIT 10;
 ```
 
 Here we can see the usage of the variable length paths.
