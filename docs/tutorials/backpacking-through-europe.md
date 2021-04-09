@@ -81,7 +81,7 @@ which country has the most cities in the index?
 
 ```cypher
 MATCH (n:Country)<-[:Inside]-(m:City)
-RETURN n.name AS countryName, COUNT(m) AS hostelCount
+RETURN n.name AS countryName, count(m) AS hostelCount
 ORDER BY hostelCount DESC, countryName
 LIMIT 10;
 ```
